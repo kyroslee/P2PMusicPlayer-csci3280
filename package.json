@@ -1,0 +1,17 @@
+{
+  "name": "csci3280-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-rebuild"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "electron": "^1.8.3",
+    "electron-rebuild": "^1.7.3"
+  }
+}
