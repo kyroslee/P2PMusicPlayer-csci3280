@@ -6,25 +6,10 @@
 <body>
     <h1>Media Player</h1>
     <ul></ul>
-
-    <script>
-        const electron = require('electron');
-        const {ipcRenderer} = electron;
-        const ul = document.querySelector('ul');
-
-        ipcRenderer.on('item:add', function(e,item){
-            const li = document.createElement('li');
-            const itemText = document.createTextNode(item);
-            li.appendChild(itemText);
-            ul.appendChild(li);
-        });
-        
-        ul.addEventListener('dbclick', removeItem);
-
-        function removeItem(e){
-            e.target.remove();
-        }
-        
-    </script>
+    <button onclick="playWav()">Try it</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="stop()">Stop</button>
+    <canvas id="visualizer"></canvas>
+    <script src="index.js"></script>
 </body>
 </html>
