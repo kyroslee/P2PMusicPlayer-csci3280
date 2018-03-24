@@ -1,0 +1,42 @@
+body {
+    background-color: rgb(64,64,64) !important;
+}
+
+tr {
+    font-family: 'Share Tech Mono';
+    font-size:30px;
+    color:red;
+}
+
+
+button {
+
+}
+
+#play {
+    position: fixed;
+    bottom:0;
+    left:0;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+#pause{
+    position: fixed;
+    bottom:0;
+    left:320px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+#stop {
+    position: fixed;
+    bottom:0;
+    left: 640px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    margin-left: 30px;
+}

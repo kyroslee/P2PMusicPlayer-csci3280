@@ -11,7 +11,7 @@ let searchWindow;
 
 app.on('ready', function(){
     //create new window
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({width: 1024, height:768});
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'mainWindow.html'),
         protocol:'file:',

@@ -48,6 +48,7 @@ ipcRenderer.on('item:add', function(e,item){
 
 });
 
+const row = document.importNode(template.content, true);
 
 
 ul.addEventListener('dbclick', removeItem);
@@ -59,7 +60,7 @@ function removeItem(e){
 function playWav(song) {
     wavPlayer.connect(audioCtx.destination);
     wavPlayer.connect(visualizer.analyser);
-    wavPlayer.play(song);
+    wavPlayer.play('harvest.wav');
 }
 
 function pause(){

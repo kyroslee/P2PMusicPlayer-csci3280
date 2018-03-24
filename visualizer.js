@@ -5,11 +5,11 @@ class Visualizer{
     //bind html canvas into visualizer and set up
     this.visualizer = document.getElementById('visualizer');
     this.analyser = audioCtx.createAnalyser();
-    this.visualizer.height = 500;
-    this.visualizer.width = 1000;
+    this.visualizer.height = 40;
+    this.visualizer.width = 200;
     this.context = this.visualizer.getContext('2d');
 
-    this.analyser.fftSize = 2048;
+    this.analyser.fftSize = 512;
     this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
     this.analyser.getByteTimeDomainData(this.dataArray);
     this.draw();
