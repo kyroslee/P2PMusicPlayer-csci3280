@@ -32,7 +32,7 @@
     <script>
         const electron = require('electron');
         const {ipcRenderer} = electron;
-        
+
         const form = document.querySelector('form');
         form.addEventListener('submit', submitForm);
 
@@ -42,6 +42,8 @@
             const artist = document.querySelector('#Artist').value;
             const album = document.querySelector('#Album').value;
             const lyric = document.querySelector('#lyric').value;
+            //var item = {"filename":filename, "artist":artist, "album":album, "lyric":lyric};
+            var item = [filename, artist, album, lyric];
             ipcRenderer.send('item:add', item);
         }
     </script>

@@ -28,7 +28,7 @@ class Visualizer{
     for(var i = 0; i < this.analyser.fftSize; i++) {
       barHeight = this.dataArray[i];
 
-      this.context.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
+      this.context.fillStyle = 'rgb(' + (barHeight+100) + ', 30,  30)';
       this.context.fillRect(x,this.visualizer.height-barHeight,barWidth,barHeight);
 
       x += barWidth + 1;

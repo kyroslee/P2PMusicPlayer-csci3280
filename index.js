@@ -17,12 +17,38 @@ const electron = require('electron');
 const {ipcRenderer} = electron;
 const ul = document.querySelector('ul');
 
+
 ipcRenderer.on('item:add', function(e,item){
-    const li = document.createElement('li');
-    const itemText = document.createTextNode(item);
-    li.appendChild(itemText);
-    ul.appendChild(li);
+    const songInfoDiv = document.querySelector('tbody.songInfo');
+    const tr = document.createElement('tr');
+    for(var i = 0; i <item.length; i++){
+        //console.log(item[i]);
+        var td = document.createElement('td');
+        switch(i){
+            case 0:
+                td.className = 'songName';
+                break;
+            case 1:
+                td.className = 'artist';
+                break;
+            case 2:
+                td.className = 'album';
+                break;
+            case 3:
+                td.className = 'lyrics';
+                break;
+            default:
+                console.log("helloworld");
+        }
+        var itemContent = document.createTextNode(item[i]);
+        td.appendChild(itemContent);
+        tr.appendChild(td);
+        songInfoDiv.appendChild(tr);
+    };
+
 });
+
+
 
 ul.addEventListener('dbclick', removeItem);
 
@@ -30,10 +56,10 @@ function removeItem(e){
     e.target.remove();
 }
 
-function playWav() {
+function playWav(song) {
     wavPlayer.connect(audioCtx.destination);
     wavPlayer.connect(visualizer.analyser);
-    wavPlayer.play('abc.wav');
+    wavPlayer.play(song);
 }
 
 function pause(){
