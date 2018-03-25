@@ -48,7 +48,10 @@ ipcRenderer.on('item:add', function(e,item){
 
 });
 
-const row = document.importNode(template.content, true);
+const songg = document.querySelector(".songInfo");
+songg.addEventListener('click',function(e){
+    playWav(e.target.innerHTML);
+});
 
 
 ul.addEventListener('dbclick', removeItem);
@@ -60,7 +63,7 @@ function removeItem(e){
 function playWav(song) {
     wavPlayer.connect(audioCtx.destination);
     wavPlayer.connect(visualizer.analyser);
-    wavPlayer.play('test.wav');
+    wavPlayer.play(song);
 }
 
 function pause(){
