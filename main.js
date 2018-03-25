@@ -84,6 +84,11 @@ ipcMain.on('item:add', function(e, item){
     insertWindow.close();
 });
 
+ipcMain.on('item:delete', function(e, item){
+    mainWindow.webContents.send('item:delete', item);
+    deleteWindow.close();
+});
+
 const mainMenuTemplate = [
     {
         label:'File',

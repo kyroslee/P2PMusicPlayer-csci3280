@@ -26,6 +26,16 @@ var song = new Array();
         });
   }
 
+  function deleteSong(song)
+  {
+        var stmt = db.prepare("DELETE FROM song WHERE " +
+                              "Name like '%" + song[0] + "%' AND "+
+                              "artist like '%" + song[1] + "%' AND " +
+                              "album like '%" + song[2] + "%' AND " +
+                              "lyrics like '%" + song[3] + "%'");
+        console.log("deleted");
+  }
+
   function song_search(key)
   {
       var result = db.prepare("SELECT * FROM song WHERE " +
@@ -46,4 +56,4 @@ var song = new Array();
     db.close();
   }
 
-module.exports = {create, insert, song_search, Disconnect, Display};
+module.exports = {create, insert, song_search, Disconnect, Display, deleteSong};

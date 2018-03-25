@@ -1,5 +1,6 @@
 const WavPlayer = require('./wavPlayer.js');
 const Visualizer = require('./visualizer.js');
+const db = require('./db.js');
 
 const audioCtx = new AudioContext();
 
@@ -16,6 +17,8 @@ visualizer.analyser.connect(audioCtx.destination);
 const electron = require('electron');
 const {ipcRenderer} = electron;
 const ul = document.querySelector('ul');
+
+displaySongInDB();
 
 
 ipcRenderer.on('item:add', function(e,item){
@@ -43,9 +46,16 @@ ipcRenderer.on('item:add', function(e,item){
         var itemContent = document.createTextNode(item[i]);
         td.appendChild(itemContent);
         tr.appendChild(td);
-        songInfoDiv.appendChild(tr);
     };
+    songInfoDiv.appendChild(tr);
+    var songObj = {"songName":item[0], "artist":item[1], "album":item[2], "lyrics":item[3]};
+    db.insert(songObj);
+});
 
+ipcRenderer.on('item:delete', function(e,item){
+    db.deleteSong(item);
+    document.getElementsByClassName("songInfo").remove();
+    displaySongInDB();
 });
 
 const songg = document.querySelector(".songInfo");
@@ -76,4 +86,36 @@ function pause(){
 
 function stop(){
     wavPlayer.stop();
+}
+
+function displaySongInDB(){
+    const songsInDB = db.Display();
+    for(var i = 0;i < songsInDB.length; i++){
+        console.log(songsInDB[i]);
+        const dbSongInfo = document.querySelector('tbody.songInfo');
+        const tr = document.createElement('tr');
+
+
+        var itemName = document.createTextNode(songsInDB[i]['Name']);
+        var td = document.createElement('td');
+        td.appendChild(itemName);
+        tr.appendChild(td);
+
+        var itemArtist = document.createTextNode(songsInDB[i]['artist']);
+        var td1= document.createElement('td');
+        td1.appendChild(itemArtist);
+        tr.appendChild(td1);
+
+        var itemAlbum = document.createTextNode(songsInDB[i]['album']);
+        var td2 = document.createElement('td');
+        td2.appendChild(itemAlbum);
+        tr.appendChild(td2);
+
+        var itemLyrics = document.createTextNode(songsInDB[i]['lyrics']);
+        var td3 = document.createElement('td');
+        td3.appendChild(itemLyrics);
+        tr.appendChild(td3);
+        dbSongInfo.appendChild(tr);
+
+    };
 }
