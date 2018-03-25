@@ -13,9 +13,7 @@ let searchWindow;
 app.on('ready', function(){
     //create new window
     DB.create();
-    var song = {"songName":"test2.wav", "artist":"Jason", "album":"ABC", "lyrics":"abc.lyr" }
-    DB.insert(song);
-    DB.song_search("a");
+    console.log(DB.Display());
     mainWindow = new BrowserWindow({width: 1024, height:768});
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'src/mainWindow.html'),
@@ -24,6 +22,7 @@ app.on('ready', function(){
     }));
     //Quit handler
     mainWindow.on('closed', function(){
+        DB.Disconnect();
         app.quit();
     });
 
