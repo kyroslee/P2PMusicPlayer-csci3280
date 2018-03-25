@@ -1,6 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+const DB = require('./src/db.js');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
@@ -11,9 +12,13 @@ let searchWindow;
 
 app.on('ready', function(){
     //create new window
+    DB.create();
+    var song = {"songName":"test2.wav", "artist":"Jason", "album":"ABC", "lyrics":"abc.lyr" }
+    DB.insert(song);
+    DB.song_search("a");
     mainWindow = new BrowserWindow({width: 1024, height:768});
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'mainWindow.html'),
+        pathname: path.join(__dirname, 'src/mainWindow.html'),
         protocol:'file:',
         slashes: true
     }));

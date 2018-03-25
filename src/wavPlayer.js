@@ -1,4 +1,4 @@
-const wav_parser = require('./build/Release/wav_parser');
+const wav_parser = require('../build/Release/wav_parser');
 
 class WavPlayer {
   constructor({ audioCtx }) {

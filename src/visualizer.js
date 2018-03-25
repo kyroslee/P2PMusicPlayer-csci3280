@@ -29,7 +29,7 @@ class Visualizer{
       barHeight = this.dataArray[i];
 
       this.context.fillStyle = 'rgb(' + (barHeight+100) + ', 30,  30)';
-      this.context.fillRect(x,this.visualizer.height-barHeight,barWidth,barHeight);
+      this.context.fillRect(x,this.visualizer.height-barHeight/5,barWidth,barHeight/2);
 
       x += barWidth + 1;
     }

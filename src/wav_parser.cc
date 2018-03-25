@@ -44,29 +44,35 @@ namespace wav_parser{
     wav_hdr wavHeader;
     //Read the header
     char buffer2[2];
-    fread(&wavHeader.RIFF, 1, 4, wavFile);
-    fread(&wavHeader.ChunkSize, 1, 4, wavFile);
-    fread(&wavHeader.WAVE, 1, 4, wavFile);
-    fread(&wavHeader.fmt, 1, 4, wavFile);
-    fread(&wavHeader.Subchunk1Size, 1, 4, wavFile);
+    size_t result;
+    result = fread(&wavHeader.RIFF, 1, 4, wavFile);
+    if(result == 0)
+    {
+      cout << "error reading header\n" << endl;
+      exit(3);
+    }
+    result = fread(&wavHeader.ChunkSize, 1, 4, wavFile);
+    result = fread(&wavHeader.WAVE, 1, 4, wavFile);
+    result = fread(&wavHeader.fmt, 1, 4, wavFile);
+    result = fread(&wavHeader.Subchunk1Size, 1, 4, wavFile);
 
-    fread(buffer2, 1, 2, wavFile);
+    result = fread(buffer2, 1, 2, wavFile);
     wavHeader.AudioFormat = buffer2[0] | buffer2[1] << 8;//converting from little to big endianness
 
-    fread(buffer2, 1, 2, wavFile);
+    result = fread(buffer2, 1, 2, wavFile);
     wavHeader.NumOfChan = buffer2[0] | buffer2[1] << 8;//converting from little to big endianness
 
-    fread(&wavHeader.SampleRate, 1, 4, wavFile);
-    fread(&wavHeader.ByteRate, 1, 4, wavFile);
+    result = fread(&wavHeader.SampleRate, 1, 4, wavFile);
+    result = fread(&wavHeader.ByteRate, 1, 4, wavFile);
 
-    fread(buffer2, 1, 2, wavFile);
+    result = fread(buffer2, 1, 2, wavFile);
     wavHeader.blockAlign = buffer2[0] | buffer2[1] << 8;//converting from little to big endianness
 
-    fread(buffer2, 1, 2, wavFile);
+    result = fread(buffer2, 1, 2, wavFile);
     wavHeader.bitsPerSample = buffer2[0] | buffer2[1] << 8;//converting from little to big endianness
 
-    fread(&wavHeader.Subchunk2ID, 1, 4, wavFile);
-    fread(&wavHeader.Subchunk2Size, 1, 4, wavFile);
+    result = fread(&wavHeader.Subchunk2ID, 1, 4, wavFile);
+    result = fread(&wavHeader.Subchunk2Size, 1, 4, wavFile);
 
     	int filelength = wavHeader.ChunkSize + 8;
 
@@ -101,7 +107,7 @@ namespace wav_parser{
 
     unsigned char* data;
     data = new unsigned char[wavHeader.Subchunk2Size];
-    fread(data, 1, wavHeader.Subchunk2Size, wavFile);
+    result = fread(data, 1, wavHeader.Subchunk2Size, wavFile);
     for(int i = 0; i < samples; i++){
       float leftSample = (float)((short*) data)[i*2];
       float rightSample = (float)((short*) data)[i*2+1];

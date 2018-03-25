@@ -60,7 +60,7 @@ function removeItem(e){
 function playWav(song) {
     wavPlayer.connect(audioCtx.destination);
     wavPlayer.connect(visualizer.analyser);
-    wavPlayer.play('harvest.wav');
+    wavPlayer.play('test.wav');
 }
 
 function pause(){

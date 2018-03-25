@@ -10,10 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "boostrap": "^2.0.0",
     "bootstrap": "^4.0.0",
     "electron": "^1.8.3",
     "electron-rebuild": "^1.7.3",
+    "jquery": "^3.3.1",
     "nan": "^2.10.0",
-    "node-gyp": "^3.6.2"
+    "node-gyp": "^3.6.2",
+    "popper.js": "^1.14.1",
+    "sqlite3": "^4.0.0"
   }
 }
