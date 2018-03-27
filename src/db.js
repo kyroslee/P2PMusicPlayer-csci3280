@@ -29,11 +29,10 @@ var song = new Array();
   function deleteSong(song)
   {
         var stmt = db.prepare("DELETE FROM song WHERE " +
-                              "Name like '%" + song[0] + "%' AND "+
-                              "artist like '%" + song[1] + "%' AND " +
-                              "album like '%" + song[2] + "%' AND " +
-                              "lyrics like '%" + song[3] + "%'");
-        console.log("deleted");
+                              "Name ='" + song[0] + "'");
+        //console.log("deleted");
+        stmt.run();
+        console.log('db deleted');
   }
 
   function song_search(key)

@@ -29,16 +29,16 @@ ipcRenderer.on('item:add', function(e,item){
         var td = document.createElement('td');
         switch(i){
             case 0:
-                td.className = 'songName';
+                td.id = 'songName';
                 break;
             case 1:
-                td.className = 'artist';
+                td.id = 'artist';
                 break;
             case 2:
-                td.className = 'album';
+                td.id = 'album';
                 break;
             case 3:
-                td.className = 'lyrics';
+                td.id = 'lyrics';
                 break;
             default:
                 console.log("helloworld");
@@ -54,13 +54,17 @@ ipcRenderer.on('item:add', function(e,item){
 
 ipcRenderer.on('item:delete', function(e,item){
     db.deleteSong(item);
-    document.getElementsByClassName("songInfo").remove();
-    displaySongInDB();
+    console.log('deletefinished html');
+    //displaySongInDB();
+    mainWindow.reload();
 });
 
 const songg = document.querySelector(".songInfo");
 songg.addEventListener('click',function(e){
-    playWav(e.target.innerHTML);
+    if(e.target.id == 'songName')
+        playWav(e.target.innerHTML);
+    else if(e.target.classNAme = 'lyrics')
+        ;//show the lyrics
 });
 
 
@@ -95,24 +99,27 @@ function displaySongInDB(){
         const dbSongInfo = document.querySelector('tbody.songInfo');
         const tr = document.createElement('tr');
 
-
         var itemName = document.createTextNode(songsInDB[i]['Name']);
         var td = document.createElement('td');
+        td.id = 'songName';
         td.appendChild(itemName);
         tr.appendChild(td);
 
         var itemArtist = document.createTextNode(songsInDB[i]['artist']);
         var td1= document.createElement('td');
+        td1.id = 'artist';
         td1.appendChild(itemArtist);
         tr.appendChild(td1);
 
         var itemAlbum = document.createTextNode(songsInDB[i]['album']);
         var td2 = document.createElement('td');
+        td2.id = 'album';
         td2.appendChild(itemAlbum);
         tr.appendChild(td2);
 
         var itemLyrics = document.createTextNode(songsInDB[i]['lyrics']);
         var td3 = document.createElement('td');
+        td3.id = 'lyrics';
         td3.appendChild(itemLyrics);
         tr.appendChild(td3);
         dbSongInfo.appendChild(tr);
