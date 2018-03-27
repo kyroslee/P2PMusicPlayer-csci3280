@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(64,64,64) !important;
+    background-color: rgb(0, 0, 0) !important;
 }
 
 tr {
@@ -100,7 +100,24 @@ button {
 
 }
 
-#play {
+.visualizerDiv {
+    position: fixed;
+    bottom:0;
+}
+#demo {
+    margin-top:10px;
+}
+#lyricsDisplay {
+    background-color:black;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+#pause{
+    background-image: url(images/cancel.png);
+    font-family: Aclonica;
+    font-weight: bold;
     position: fixed;
     bottom:0;
     left:0;
@@ -109,21 +126,26 @@ button {
     margin-right: 30px;
     margin-left: 30px;
 }
-#pause{
+#stop {
+    font-family: Aclonica;
+    font-weight: bold;
     position: fixed;
     bottom:0;
-    left:320px;
+    right: 0;
     margin-top: 30px;
     margin-bottom: 30px;
     margin-right: 30px;
     margin-left: 30px;
 }
-#stop {
-    position: fixed;
-    bottom:0;
-    left: 640px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-right: 30px;
-    margin-left: 30px;
+
+tbody {
+  display:block;
+  height:400px;
+  overflow:auto;
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
 }

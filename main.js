@@ -14,7 +14,7 @@ app.on('ready', function(){
     //create new window
     DB.create();
     console.log(DB.Display());
-    mainWindow = new BrowserWindow({width: 1024, height:768});
+    mainWindow = new BrowserWindow({width: 1024, height:816});
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'src/mainWindow.html'),
         protocol:'file:',

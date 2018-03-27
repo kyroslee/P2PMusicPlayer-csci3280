@@ -2,6 +2,13 @@ const WavPlayer = require('./wavPlayer.js');
 const Visualizer = require('./visualizer.js');
 const db = require('./db.js');
 
+
+var fs = require('fs');
+var parseLrc = require('parse.lrc');
+
+
+
+
 const audioCtx = new AudioContext();
 
 const wavPlayer = new WavPlayer({
@@ -16,7 +23,6 @@ visualizer.analyser.connect(audioCtx.destination);
 
 const electron = require('electron');
 const {ipcRenderer} = electron;
-const ul = document.querySelector('ul');
 
 displaySongInDB();
 
@@ -64,16 +70,20 @@ ipcRenderer.on('item:delete', function(e,item){
     displaySongInDB();
 });
 
+var lrcData;
+var lrc;
+
 const songg = document.querySelector(".songInfo");
 songg.addEventListener('click',function(e){
     if(e.target.id == 'songName')
-        playWav(e.target.innerHTML);
+        playWav("./store/"+e.target.innerHTML);
     else if(e.target.classNAme = 'lyrics')
-        ;//show the lyrics
+    {
+        lrcData = fs.readFileSync("./store/"+ e.target.innerHTML,'utf-8');
+        lrc = parseLrc(lrcData);
+        console.log(lrc.lrcArray[0]);   //output: {lrcInfo:{...},lrcArray{....}}
+    }//show the lyrics
 });
-
-
-ul.addEventListener('dbclick', removeItem);
 
 function removeItem(e){
     e.target.remove();
@@ -86,11 +96,7 @@ function playWav(song) {
 }
 
 function pause(){
-    if(audioCtx.state === 'running') {
-    audioCtx.suspend();
-  } else if(audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
+    wavPlayer.pause();
 }
 
 function stop(){
@@ -135,9 +141,31 @@ function displaySongInDB(){
 
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
-output.innerHTML = slider.value; // Display the default slider value
+output.innerHTML = "00:00/00:00"; // Display the default slider value
 
 // Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-    output.innerHTML = this.value;
+slider.onchange = function() {
+    wavPlayer.seek(this.value);
+    // document.getElementById("demo").innerHTML = wavPlayer.getTimeString(wavPlayer.get_time()) + "/" + wavPlayer.get_duration();
+    // output.innerHTML = this.value;
+}
+
+setInterval(timer, 1000);
+function timer(){
+  if(wavPlayer.check_state()){
+    wavPlayer.update();
+  }
+    var current_time = wavPlayer.get_current_time();
+    if(lrc)
+    {
+        for(var i = 0; i < lrc.lrcArray.length; i++){
+            if(lrc.lrcArray[i].timestamp > current_time){
+                document.getElementById("lyricsDisplay").innerHTML = lrc.lrcArray[i - 1].lyric;
+                break;
+            }
+        }
+    }
+    slider.max = wavPlayer.get_duration();
+    document.getElementById("myRange").value = current_time / wavPlayer.get_duration() * slider.max;
+    document.getElementById("demo").innerHTML = wavPlayer.getTimeString(current_time) + "/" + wavPlayer.getTimeString(wavPlayer.get_duration());
 }
