@@ -54,9 +54,14 @@ ipcRenderer.on('item:add', function(e,item){
 
 ipcRenderer.on('item:delete', function(e,item){
     db.deleteSong(item);
+    var remove = document.querySelector("tbody.songInfo");
+    while(remove.hasChildNodes())
+    {
+        console.log("you have child");
+        remove.removeChild(remove.lastChild);
+    }
     console.log('deletefinished html');
-    //displaySongInDB();
-    mainWindow.reload();
+    displaySongInDB();
 });
 
 const songg = document.querySelector(".songInfo");
