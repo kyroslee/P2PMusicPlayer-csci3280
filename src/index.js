@@ -156,6 +156,9 @@ function timer(){
     wavPlayer.update();
   }
     var current_time = wavPlayer.get_current_time();
+    slider.max = wavPlayer.get_duration();
+    document.getElementById("myRange").value = current_time / wavPlayer.get_duration() * slider.max;
+    document.getElementById("demo").innerHTML = wavPlayer.getTimeString(current_time) + "/" + wavPlayer.getTimeString(wavPlayer.get_duration());
     if(lrc)
     {
         for(var i = 0; i < lrc.lrcArray.length; i++){
@@ -165,7 +168,5 @@ function timer(){
             }
         }
     }
-    slider.max = wavPlayer.get_duration();
-    document.getElementById("myRange").value = current_time / wavPlayer.get_duration() * slider.max;
-    document.getElementById("demo").innerHTML = wavPlayer.getTimeString(current_time) + "/" + wavPlayer.getTimeString(wavPlayer.get_duration());
+
 }
