@@ -1,6 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+const DB = require('./src/db.js');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
@@ -11,14 +12,17 @@ let searchWindow;
 
 app.on('ready', function(){
     //create new window
-    mainWindow = new BrowserWindow({});
+    DB.create();
+    console.log(DB.Display());
+    mainWindow = new BrowserWindow({width: 1024, height:816});
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'mainWindow.html'),
+        pathname: path.join(__dirname, 'src/mainWindow.html'),
         protocol:'file:',
         slashes: true
     }));
     //Quit handler
     mainWindow.on('closed', function(){
+        DB.Disconnect();
         app.quit();
     });
 
@@ -78,6 +82,11 @@ function createSearchWindow(){
 ipcMain.on('item:add', function(e, item){
     mainWindow.webContents.send('item:add', item);
     insertWindow.close();
+});
+
+ipcMain.on('item:delete', function(e, item){
+    mainWindow.webContents.send('item:delete', item);
+    deleteWindow.close();
 });
 
 const mainMenuTemplate = [

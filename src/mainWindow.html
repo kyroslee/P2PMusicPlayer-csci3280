@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSCI3280-Project</title>
+    <link rel="stylesheet" type="text/css" href="./mainWindow.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Share Tech Mono' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Song</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Lyrics</th>
+            </tr>
+        </thead>
+        <tbody class="songInfo" style="font-size:20px; color:red">
+        </tbody>
+    </table>
+
+    <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
+    <p id='demo'  style="font-size:20px; color:white" >1</p>
+
+    <div>
+        <p id="lyricsDisplay" > </p>
+    </div>
+
+
+    <div class="visualizerDiv" style="display:block; width:100%" align="center">
+      <canvas id="visualizer" style="width:100%;"></canvas>
+      <button onclick="pause()" class="btn btn-danger" id="pause" >Pause</button>
+      <button onclick="stop()" class="btn btn-danger" id="stop">Stop</button>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
