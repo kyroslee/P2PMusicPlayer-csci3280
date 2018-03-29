@@ -4,7 +4,7 @@ const IPv6 = require('ip-address').Address6;
 window.p2pPeers = {};
 window.p2pAlbums = {};
 
-const p2pBrowser = mdns.createBrowser(mdns.tcp('yo'));
+const p2pBrowser = mdns.createBrowser(mdns.tcp('p2p-player'));
 
 let listUpdateHandler = () => {};
 function setListUpdateHandler(f) {

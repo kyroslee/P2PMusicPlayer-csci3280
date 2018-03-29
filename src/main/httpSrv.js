@@ -22,7 +22,7 @@ module.exports = {
         const server = http.createServer(app).listen();
         app.set('port', server.address().port);
         mdns.createAdvertisement(
-            mdns.tcp('yo'),
+            mdns.tcp('p2p-player'),
             server.address().port
         ).start();
     }
