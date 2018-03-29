@@ -3,10 +3,40 @@
     <head>
         <title>P2P Music Player</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./index.css">
         <link rel="stylesheet" type="text/css" href="../../node_modules/font-awesome/css/font-awesome.min.css">
     </head>
 
     <body>
+        <div id="list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Album</th>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>File Type</th>
+                        <th>Node(s)</th>
+                    </tr>
+                </thead>
+                <tbody id="list-body">
+                </tbody>
+            </table>
+            <template id="list-row-template">
+            <tr class="list-row">
+                <td class="list-row-album">
+                    <p class="list-row-album-name"></p>
+                    <img class="list-row-album-artwork" src="">
+                </td>
+                <td class="list-row-track"></td>
+                <td class="list-row-title"></td>
+                <td class="list-row-artist"></td>
+                <td class="list-row-file-type"></td>
+                <td class="list-row-nodes"></td>
+            </tr>
+            </template>
+        </div>
         <script src="index.js"></script>
     </body>
 </html>
