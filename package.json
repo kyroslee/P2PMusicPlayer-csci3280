@@ -1,17 +1,24 @@
 {
-  "name": "csci3280-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "build": "electron-rebuild"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bootstrap": "^4.0.0",
-    "electron": "^1.8.3",
-    "electron-rebuild": "^1.7.3"
-  }
+    "name": "csci3280-project",
+        "version": "1.0.0",
+        "description": "",
+        "main": "src/main/main.js",
+        "scripts": {
+            "start": "electron .",
+            "build": "electron-rebuild"
+        },
+        "author": "",
+        "license": "ISC",
+        "dependencies": {
+            "electron": "^1.8.3",
+            "electron-rebuild": "^1.7.3",
+            "cors": "^2.8.4",
+            "express": "^4.16.3",
+            "express-range": "^2.0.1",
+            "font-awesome": "^4.7.0",
+            "ip-address": "^5.8.9",
+            "js-yaml": "^3.11.0",
+            "mdns": "^2.3.4",
+            "nan": "^2.9.2"
+        }
 }
