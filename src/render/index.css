@@ -34,3 +34,37 @@ body {
 #list > table > tbody > tr > td {
     padding: 0.5rem;
 }
+
+#player {
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem 0;
+}
+
+#play-pause-button {
+    font-size: 2rem;
+    min-width: 2.5rem;
+    cursor: pointer;
+}
+
+#seek-clickable {
+    flex-grow: 1;
+    margin-left: 1rem;
+    padding: 1rem 0 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#seek-bar {
+    width: 100%;
+    height: 3px;
+    background: #888;
+}
+
+#seek-progress {
+    width: 0%;
+    height: 100%;
+    background: #FFF;
+}
