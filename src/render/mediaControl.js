@@ -1,4 +1,4 @@
-class mediaControl {
+class MediaControl {
     constructor({ title, playPauseButton, seekClickable, seekProgress }) {
         this.playPauseButton = document.querySelector(playPauseButton);
         this.seekClickable = document.querySelector(seekClickable);

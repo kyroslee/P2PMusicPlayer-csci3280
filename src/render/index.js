@@ -4,8 +4,8 @@ const MediaControl = require('./MediaControl.js');
 
 const audioCtx = new AudioContext();
 
-const audioPlayer = new AudioPlayer({audioCtx});
-const mediaControl = new mediaControl({
+const audioPlayer = new AudioPlayer({ audioCtx });
+const mediaControl = new MediaControl({
     playPauseButton: '#play-pause-button',
     seekClickable: '#seek-clickable',
     seekProgress: '#seek-progress'

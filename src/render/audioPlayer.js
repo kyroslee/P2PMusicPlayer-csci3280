@@ -1,4 +1,4 @@
-class audioPlayer {
+class AudioPlayer {
     constructor({ audioCtx }) {
         this.ctx = audioCtx;
         this.audio = new Audio();
@@ -45,4 +45,4 @@ class audioPlayer {
     }
 }
 
-module.export = AudioPlayer;
+module.exports = AudioPlayer;
