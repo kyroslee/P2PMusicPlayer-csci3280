@@ -3,6 +3,7 @@ const cors = require('cors');
 const range = require('express-range');
 const http = require('http');
 const mdns = require('mdns');
+const db = require('./db.js');
 
 module.exports = {
     start(mediaPath){
@@ -17,7 +18,13 @@ module.exports = {
         }));
 
         app.use(range({ accept: 'samples' }));
-        //app.use('/media', express.static(mediaPath));
+        app.use('/media', express.static(mediaPath));
+
+        const localAlbums = db.getLocalAlbums(mediaPath);
+        app.get('/db', (req, res)=>{
+            res.json(localAlbums);
+            res.end();
+        });
 
         const server = http.createServer(app).listen();
         app.set('port', server.address().port);
