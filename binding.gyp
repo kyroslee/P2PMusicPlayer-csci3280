@@ -5,7 +5,7 @@
             "<!(node -e \"require('nan')\")"
             ],
             "target_name": "decoder",
-            "sources": [ "src/decoder/wav_decoder.cc" ]
+            "sources": [ "src/decoder/wav_parser.cc" ]
     }
     ]
 }

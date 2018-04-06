@@ -57,7 +57,7 @@ function playTrack(album, track){
             player.play(urlList);
             break;
         case "MP3" :
-        //case "FLAC" :
+        case "FLAC" :
             player = connectPlayer(audioPlayer);
             player.play(urlList[0]);
             break;

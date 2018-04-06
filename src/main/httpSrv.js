@@ -30,7 +30,6 @@ module.exports = {
             wavDecoder.decode(
                 `${mediaPath}/${req.params.filePath}`, false,
                 (samples, sampleRate) => {
-                    console.log("wavvvvvvvvvvvvvvv");
                     res.set('Wav-Samples', samples);
                     res.set('Wav-SampleRate', sampleRate);
                     res.end();
