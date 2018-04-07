@@ -1,7 +1,7 @@
 const p2p = require('./p2p.js');
 const AudioPlayer = require('./audioPlayer.js');
 const WavPlayer = require('./wavPlayer.js');
-const MediaControl = require('./MediaControl.js');
+const MediaControl = require('./mediaControl.js');
 const VideoPlayer = require('./videoPlayer.js');
 
 //audio context
@@ -98,9 +98,9 @@ const templateFileType =
 const templateNodes =
     template.content.querySelector('.list-row-nodes');
 
-p2p.onListUpdate(albums => {
+function renderList (albums){
     list.innerHTML = "";
-    //for each album
+    //Render for each album
     Object.values(albums).forEach(album => {
         const firstPeer = Object.values(album.peers)[0];
         templateAlbumName.textContent = album.album;
@@ -128,4 +128,28 @@ p2p.onListUpdate(albums => {
             list.appendChild(row);
         });
     });
+}
+
+//searching function
+const searchInput = document.querySelector('#search-input');
+
+function strMatching(s1, s2){
+    return (s1.toUpperCase().indexOf(s2.toUpperCase()) > -1);
+}
+
+p2p.onListUpdate(albums => {
+    renderList(albums);
+    searchInput.onkeyup = ({ target: {value: searchValue} })=>{
+        const filteredAlbums = Object.values(albums)
+            .map(album => {
+                const albumCloned = JSON.parse(JSON.stringify(album));
+                albumCloned.tracks = album.tracks.filter(({ title, artist: trackArtist }) => {
+                    const artist = trackArtist || album.artist;
+                    return strMatching(artist,searchValue) || strMatching(title,searchValue) || strMatching(album.album,searchValue);
+                });
+                return albumCloned;
+            })
+            .filter(({ tracks }) => tracks.length > 0);
+        renderList(filteredAlbums);
+    };
 });

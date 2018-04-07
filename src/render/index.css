@@ -11,6 +11,34 @@ body {
     margin: 0;
 }
 
+#search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F1F8FF;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    z-index : 1;
+    height: 5rem;
+}
+
+#search-input {
+    height: 2rem;
+    width: 80%;
+    color: #586068;
+    background: #F1F8FF;
+    font-size: 1rem;
+    border-width: thin;
+    border-style: groove;
+}
+
+#search-icon{
+    font-size: 2rem;
+    padding-right: 1rem;
+}
+
 #list {
     flex-grow: 1;
     overflow-y: scroll;
