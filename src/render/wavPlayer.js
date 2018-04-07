@@ -16,7 +16,7 @@ class WavPlayer {
     _updateProgress() {
         if(this.src && this.onProgressUpdate) {
             const p = (this.ctx.currentTime - this.startTime) / this.duration;
-            this.onProgressUpdate(p);
+            this.onProgressUpdate(p, this.getCurrentTime());
         }
         window.requestAnimationFrame(this._updateProgress.bind(this));
     }
@@ -28,6 +28,9 @@ class WavPlayer {
     }
     isPlaying() {
         return this.src != null;
+    }
+    getCurrentTime() {
+        return (this.ctx.currentTime - this.startTime);
     }
     _start(offset = 0) {
         this.src = this.ctx.createBufferSource();

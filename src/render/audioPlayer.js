@@ -9,7 +9,7 @@ class AudioPlayer {
         this.audio.addEventListener('timeupdate', e => {
             if(this.onProgressUpdate) {
                 const p = this.audio.currentTime/this.audio.duration;
-                this.onProgressUpdate(p);
+                this.onProgressUpdate(p, this.getCurrentTime());
             }
         });
     }
@@ -21,6 +21,9 @@ class AudioPlayer {
     }
     isPlaying() {
         return !this.audio.paused;
+    }
+    getCurrentTime() {
+        return this.audio.currentTime;
     }
     play(fileName) {
         if(fileName) {

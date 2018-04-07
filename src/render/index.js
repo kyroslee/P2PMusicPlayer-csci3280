@@ -3,6 +3,8 @@ const AudioPlayer = require('./audioPlayer.js');
 const WavPlayer = require('./wavPlayer.js');
 const MediaControl = require('./mediaControl.js');
 const VideoPlayer = require('./videoPlayer.js');
+const Visualizer = require('./visualizer.js');
+const parseLrc = require('parse.lrc');
 
 //audio context
 const audioCtx = new AudioContext();
@@ -19,9 +21,17 @@ const mediaControl = new MediaControl({
     seekProgress: '#seek-progress'
 });
 
+//visualizer
+const visualizer = new Visualizer({ audioCtx, canvas: '#visualizer'});
+visualizer.analyser.connect(audioCtx.destination);
+
 const videoSection = document.querySelector('#video-section');
+const visualEffects = document.querySelector('#visual-effects');
 function connectPlayer(player, isVideo){
-    player.connect(audioCtx.destination);
+    if (isVideo)
+        player.connect(audioCtx.destination);
+    else
+        player.connect(visualizer.analyser);
 
     mediaControl.onPlayPause = _ => {
         if (player.isPlaying()){
@@ -39,15 +49,30 @@ function connectPlayer(player, isVideo){
         console.log(`play state: ${playing?"playing":"paused"}`);
         mediaControl.setPlayState(playing);
         if (isVideo) {
-            if(playing) videoSection.classList.add('video-section-show');
-            else videoSection.classList.remove('video-section-show');
+            if (playing) {
+                videoSection.classList.add('video-section-show');
+                document.querySelector('#search').style.display = "none";
+            }
+            else {
+                videoSection.classList.remove('video-section-show');
+                document.querySelector('#search').style.display = "flex";
+            }
+        }else{
+            if (playing) {
+                visualEffects.classList.add('visual-effects-show');
+                document.querySelector('#search').style.display = "none";
+            }
+            else {
+                visualEffects.classList.remove('visual-effects-show');
+                document.querySelector('#search').style.display = "flex";
+            }
         }
     };
 
-    player.onProgressUpdate = percent => {
+    player.onProgressUpdate = (percent, currentTime) => {
         mediaControl.setProgress(percent);
+        visualizer.updateLyrics(currentTime);
     };
-
 
     return player;
 }
@@ -57,6 +82,8 @@ function playTrack(album, track){
     mediaControl.setTitle(`${track.title} - ${track.artist || album.artist}`);
     player.pause();
     player.disconnect();
+    visualizer.setLyrics(track.lyrics? parseLrc(track.lyrics):null);
+    //console.log(parseLrc(track.lyrics));
     const firstPeer = Object.values(album.peers)[0];
     const urlList = Object.values(album.peers)
         .map(peer => `http://${peer}/${track.file}`);
@@ -67,6 +94,7 @@ function playTrack(album, track){
             player.play(urlList);
             break;
         case "MP3" :
+        case "M4A" :
         case "FLAC" :
             player = connectPlayer(audioPlayer);
             player.play(urlList[0]);
@@ -77,6 +105,7 @@ function playTrack(album, track){
             break;
     }
     console.log(player);
+    window.player = player;
 }
 
 const list = document.querySelector('#list-body');

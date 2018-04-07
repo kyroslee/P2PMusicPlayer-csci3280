@@ -10,11 +10,11 @@ class MediaControl {
                 this.onPlayPause();
             }
         });
-        document.addEventListener('keydown', e => {
-            if(this.onPlayPause && e.key === ' ') {
-                this.onPlayPause();
-            }
-        });
+        //document.addEventListener('keydown', e => {
+        //    if(this.onPlayPause && e.key === 'k') {
+        //        this.onPlayPause();
+        //    }
+        //});
         this.seekClickable.addEventListener('click', e => {
             const progress = e.offsetX / this.seekClickable.clientWidth;
             if(this.onSeek && 0 <= progress && progress <= 1) {
