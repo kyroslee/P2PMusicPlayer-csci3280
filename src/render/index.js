@@ -2,18 +2,24 @@ const p2p = require('./p2p.js');
 const AudioPlayer = require('./audioPlayer.js');
 const WavPlayer = require('./wavPlayer.js');
 const MediaControl = require('./MediaControl.js');
+const VideoPlayer = require('./videoPlayer.js');
 
+//audio context
 const audioCtx = new AudioContext();
 
+//players
 const audioPlayer = new AudioPlayer({ audioCtx });
 const wavPlayer = new WavPlayer({ audioCtx });
+const videoPlayer = new VideoPlayer({ audioCtx, video: 'video' });
 
+//media control bar
 const mediaControl = new MediaControl({
     playPauseButton: '#play-pause-button',
     seekClickable: '#seek-clickable',
     seekProgress: '#seek-progress'
 });
 
+const videoSection = document.querySelector('#video-section');
 function connectPlayer(player, isVideo){
     player.connect(audioCtx.destination);
 
@@ -32,15 +38,19 @@ function connectPlayer(player, isVideo){
     player.onPlayStateChange = playing => {
         console.log(`play state: ${playing?"playing":"paused"}`);
         mediaControl.setPlayState(playing);
+        if (isVideo) {
+            if(playing) videoSection.classList.add('video-section-show');
+            else videoSection.classList.remove('video-section-show');
+        }
     };
 
     player.onProgressUpdate = percent => {
         mediaControl.setProgress(percent);
     };
 
+
     return player;
 }
-
 
 let player = connectPlayer(wavPlayer);
 function playTrack(album, track){
@@ -61,9 +71,9 @@ function playTrack(album, track){
             player = connectPlayer(audioPlayer);
             player.play(urlList[0]);
             break;
-        default:
-            //player = connectPlayer(videoPlayer, true);
-            //player.play(urlList, track.fileType);
+        default: //video or bmp
+            player = connectPlayer(videoPlayer, true);
+            player.play(urlList, track.fileType);
             break;
     }
     console.log(player);

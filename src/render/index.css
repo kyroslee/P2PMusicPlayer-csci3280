@@ -35,6 +35,25 @@ body {
     padding: 0.5rem;
 }
 
+.list-row-album-artwork {
+    width: 50%;
+}
+
+#video-section {
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 1s ease-in-out;
+    max-height: 0vh;
+}
+
+#video-section > video {
+    width: 100%;
+}
+
+.video-section-show {
+    max-height: 90vh !important;
+}
+
 #player {
     min-height: 3rem;
     display: flex;
