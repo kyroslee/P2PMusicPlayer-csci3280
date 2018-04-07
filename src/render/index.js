@@ -19,6 +19,23 @@ const mediaControl = new MediaControl({
     seekProgress: '#seek-progress'
 });
 
+//searching function
+const searchInput = document.querySelector('#search-input');
+searchInput.addEventListener('keyup',()=>{
+    let filter = searchInput.value.toUpperCase();
+    window.rowList = document.querySelectorAll('.list-row-title');
+
+    if (filter.length != 1){
+        rowList.forEach(row => {
+            if(row.innerHTML.toUpperCase().indexOf(filter) > -1){
+                row.parentElement.style.display = "";
+            }else{
+                row.parentElement.style.display = "none";
+            }
+        });
+    }
+});
+
 const videoSection = document.querySelector('#video-section');
 function connectPlayer(player, isVideo){
     player.connect(audioCtx.destination);

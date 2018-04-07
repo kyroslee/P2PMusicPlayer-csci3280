@@ -37,6 +37,7 @@ p2pBrowser.on('serviceUp', ({ addresses, port, name}) => {
                 p2pAlbums[album.album].peers = {[name]: peer};
             }
         });
+        //return albums to the event handler here
         listUpdateHandler(p2pAlbums);
     });
 
