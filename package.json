@@ -16,6 +16,7 @@
         "express": "^4.16.3",
         "express-range": "^2.0.1",
         "font-awesome": "^4.7.0",
+        "ip": "^1.1.5",
         "ip-address": "^5.8.9",
         "js-yaml": "^3.11.0",
         "mdns": "^2.3.4",
