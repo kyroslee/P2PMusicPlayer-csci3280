@@ -22,6 +22,7 @@ Project Root Folder
 │       |   cover.jpg // album cover image
 │       |   track1.wav // your tracks here
 │       |   track2.wav
+│       |   ...
 │   └───album 2
 │   └───album 3
 │   └───... //as long as how many albums you have here
