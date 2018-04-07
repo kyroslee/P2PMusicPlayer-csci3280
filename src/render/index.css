@@ -1,0 +1,89 @@
+body {
+    background: #F1F8FF;
+    color: #586068;
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+#list {
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+#list > table {
+    padding: 1rem;
+    width: 100%;
+}
+
+#list > table > thead > tr > th {
+    text-align: left;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+#list > table > tbody > tr {
+    cursor: pointer;
+}
+
+#list > table > tbody > tr > td {
+    padding: 0.5rem;
+}
+
+.list-row-album-artwork {
+    width: 50%;
+}
+
+#video-section {
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 1s ease-in-out;
+    max-height: 0vh;
+}
+
+#video-section > video {
+    width: 100%;
+}
+
+.video-section-show {
+    max-height: 90vh !important;
+}
+
+#player {
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem 0;
+}
+
+#play-pause-button {
+    font-size: 2rem;
+    min-width: 2.5rem;
+    cursor: pointer;
+}
+
+#seek-clickable {
+    flex-grow: 1;
+    margin-left: 1rem;
+    padding: 1rem 0 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#seek-bar {
+    width: 100%;
+    height: 3px;
+    background: #888;
+}
+
+#seek-progress {
+    width: 0%;
+    height: 100%;
+    background: #FFF;
+}
