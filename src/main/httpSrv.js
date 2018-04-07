@@ -3,6 +3,7 @@ const cors = require('cors');
 const range = require('express-range');
 const http = require('http');
 const mdns = require('mdns');
+const ip = require('ip');
 const db = require('./db.js');
 const wavDecoder = require('../../build/Release/decoder');
 
@@ -73,5 +74,7 @@ module.exports = {
             mdns.tcp('p2p-player'),
             server.address().port
         ).start();
+
+        console.log(`Server running on ${ip.address()}:${server.address().port} now !`);
     }
 }
