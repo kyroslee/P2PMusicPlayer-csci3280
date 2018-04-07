@@ -27,7 +27,7 @@ module.exports = {
         });
 
         app.head('/media/:filePath(*.wav)', (req, res) => {
-            wavDecoder.decode(
+            wavDecoder.wav_parsing(
                 `${mediaPath}/${req.params.filePath}`, false,
                 (samples, sampleRate) => {
                     res.set('Wav-Samples', samples);
@@ -40,7 +40,7 @@ module.exports = {
         app.get('/media/:filePath(*.wav)', ({
             params: { filePath }, range
         }, res) => {
-            wavDecoder.decode(
+            wavDecoder.wav_parsing(
                 `${mediaPath}/${filePath}`, true,
                 (samples, sampleRate, buf) => {
                     res.set('Wav-Samples', samples);
