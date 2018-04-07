@@ -1,7 +1,7 @@
 const p2p = require('./p2p.js');
 const AudioPlayer = require('./audioPlayer.js');
 const WavPlayer = require('./wavPlayer.js');
-const MediaControl = require('./MediaControl.js');
+const MediaControl = require('./mediaControl.js');
 const VideoPlayer = require('./videoPlayer.js');
 
 //audio context
